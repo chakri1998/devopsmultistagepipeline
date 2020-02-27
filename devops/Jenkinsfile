@@ -3,7 +3,7 @@ node {
  notify('Job Started') 
 	 
   stage('Git-Checkout') {
-   git branch:'continuous_integration', url:'https://github.com/chakri1998/devopswithmultijobs.git'
+   git branch:'continuous_integration', url:'https://github.com/chakri1998/devopsmultistagepipeline.git'
   }
 	 
   stage('Input to continue forther') {
@@ -58,11 +58,6 @@ node {
         server.upload(uploadSpec)
         
         }
-	 stage('Stage Deploy approval'){
-    input "Deploy to stage?"
-    build 'devops_qa_server'
-}
-
 }
 notify('Job Completed')   
 } catch (err) {
