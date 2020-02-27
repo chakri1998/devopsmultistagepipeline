@@ -2,7 +2,7 @@ node {
  try  {
  notify('Job Started') 
  stage('Git-Checkout') {
-    git branch:'production_server', url:'https://github.com/chakri1998/devopswithmultijobs.git'
+    git branch:'production_server', url:'https://github.com/chakri1998/devopsmultistagepipeline.git'
   }
 	  stage('Input for deploy in production server') {            
    input('Do you want to deploy into production server proceed?')
@@ -12,16 +12,6 @@ node {
  
  dir(project_path) {
 
-	// stage('create artifact folder to store artifact'){
-  //def folder = 'artifact'
-//if( !folder.exists() ) {
-//  folder.mkdir()
-//}
-//else{
-//    sh label: 'Jenkins', script: "mkdir artifact"
-//   }
-	 //}
-	 
     stage('Jfrog Artifactory download'){
     def server= Artifactory.server 'Artifactory'
     def downloadSpec = """{
