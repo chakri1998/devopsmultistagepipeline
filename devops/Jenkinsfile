@@ -1,15 +1,9 @@
 node {
-	
-	environment {
-    registry = "chakri1998/dev301"
-    registryCredential = 'dockerhub'
-  }
-	
  try  {
  notify('Job Started') 
 
 	  stage('Git-Checkout') {
-   git branch:'qa_server', url:'https://github.com/chakri1998/devopswithmultijobs.git'
+   git branch:'qa_server', url:'https://github.com/chakri1998/devopsmultistagepipeline.git'
   }
 	   stage('Input for deploy in test server') {  
    input('Do you want to deploy in test server proceed?')      
@@ -31,13 +25,7 @@ node {
             sh label: '', script: 'docker push chakri1998/dev301:$BUILD_NUMBER'
           }
   } 
-	 
-   stage('Stage Deploy approval'){
-    input "Deploy to stage?"
-    build 'devops_production_server'
-} 
-
- }
+}
 notify('Job Completed')   
 } catch (err) {
   notify("Error ${err}")
